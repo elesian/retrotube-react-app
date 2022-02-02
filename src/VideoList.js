@@ -10,18 +10,19 @@ const axios = require('axios').default;
 
 const VideoList = ({ search }) => {
   const searchTerm = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&publishedBefore=2008-01-01T00%3A00%3A00Z&q=${search}&key=${publicAPIKey}`;
-  const [list, setList] = useState([]);
+  const [list, setList] = useState(['a']);
   const [isLoading, setIsLoading] = useState(true);
   const [videoId, setVideoId] = useState('No video selected');
 
   const getBase64 = (url) => {
-    console.log(url);
     return axios
       .get(`https://murmuring-journey-05155.herokuapp.com/${url}`, {
         responseType: 'arraybuffer',
       })
       .then((response) => {
-        const image = Buffer.from(response.data, 'binary').toString('base64');
+        const image = new Buffer.from(response.data, 'binary').toString(
+          'base64'
+        );
         return image;
       })
       .catch((err) => console.log('ERROR' + err));
@@ -33,16 +34,25 @@ const VideoList = ({ search }) => {
         .then((res) => res.json())
         .then(({ items }) => {
           items.map((item) => {
-            getBase64(item.snippet.thumbnails.default.url).then((image) => {
-              return (items.thumbnailUrl = image);
-            });
+            return getBase64(item.snippet.thumbnails.default.url).then(
+              (image) => {
+                return (item.thumbnailURL = image);
+              }
+            );
           });
+          return items;
+        })
+        .then((items) => {
           console.log(items);
-          setList(items);
-          setIsLoading(false);
+          setList([...items]);
         });
     }
   }, [search]);
+
+  useEffect(() => {
+    //NOT WORKING
+    // setIsLoading(false);
+  }, [list]);
 
   if (search === '') {
     return <h2>No results found</h2>;
@@ -61,7 +71,7 @@ const VideoList = ({ search }) => {
                   {item.snippet.description}
                   <div>
                     <img
-                      src={item.snippet.thumbnails.default.url}
+                      src={console.log(item.thumbnailURL)}
                       alt={`img-${item.id.videoId}`}
                     ></img>
                   </div>

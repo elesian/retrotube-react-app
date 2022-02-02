@@ -1,5 +1,5 @@
 /** @format */
 
-const apiKey = 'AIzaSyBXHS30moahyEd-5GStOkAGNnyqQh38qgM';
+const apiKey = 'AIzaSyDq1JJMRjFehThLW_X7_bJ2ySrnfPa16uc';
 
 export default apiKey;
