@@ -1,0 +1,4 @@
+curl -i -X OPTIONS -H "Origin: http://127.0.0.1:3000" \
+    -H 'Access-Control-Request-Method: GET' \
+    -H 'Access-Control-Request-Headers: Content-Type, Authorization' \
+    "https://i.ytimg.com/vi/g1DgZpzz4P0/default.jpg"
