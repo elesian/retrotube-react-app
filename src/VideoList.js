@@ -10,7 +10,7 @@ const axios = require('axios').default;
 
 const VideoList = ({ search }) => {
   const searchTerm = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&publishedBefore=2008-01-01T00%3A00%3A00Z&q=${search}&key=${publicAPIKey}`;
-  const [list, setList] = useState(['a']);
+  const [list, setList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [videoId, setVideoId] = useState('No video selected');
 
@@ -33,26 +33,21 @@ const VideoList = ({ search }) => {
       fetch(searchTerm)
         .then((res) => res.json())
         .then(({ items }) => {
-          items.map((item) => {
+          items.forEach((item) => {
             return getBase64(item.snippet.thumbnails.default.url).then(
               (image) => {
-                return (item.thumbnailURL = image);
+                item.thumbnailURL = image;
               }
             );
           });
           return items;
         })
         .then((items) => {
-          console.log(items);
-          setList([...items]);
+          setList((old) => [...items]);
+          setIsLoading(false);
         });
     }
   }, [search]);
-
-  useEffect(() => {
-    //NOT WORKING
-    // setIsLoading(false);
-  }, [list]);
 
   if (search === '') {
     return <h2>No results found</h2>;
@@ -71,7 +66,7 @@ const VideoList = ({ search }) => {
                   {item.snippet.description}
                   <div>
                     <img
-                      src={console.log(item.thumbnailURL)}
+                      src={console.log(Object.keys(item))}
                       alt={`img-${item.id.videoId}`}
                     ></img>
                   </div>
