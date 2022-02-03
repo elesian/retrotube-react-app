@@ -28,26 +28,39 @@ const VideoList = ({ search }) => {
       .catch((err) => console.log('ERROR' + err));
   };
 
+  const addImage = async (item, image) => {
+    return await (item.thumbnailURL = image);
+  };
+
   useEffect(() => {
-    if (search !== '') {
+    if (search !== '' && isLoading === true) {
       fetch(searchTerm)
         .then((res) => res.json())
         .then(({ items }) => {
-          items.forEach((item) => {
-            return getBase64(item.snippet.thumbnails.default.url).then(
-              (image) => {
-                item.thumbnailURL = image;
-              }
-            );
-          });
-          return items;
+          const newList = Promise.all(
+            items.map(async (item) => {
+              return await getBase64(item.snippet.thumbnails.default.url).then(
+                (image) => {
+                  addImage(item, image);
+                  return item;
+                }
+              );
+            })
+          );
+          return newList;
         })
-        .then((items) => {
-          setList((old) => [...items]);
-          setIsLoading(false);
+        .then((newList) => {
+          setList(() => newList);
         });
     }
   }, [search]);
+
+  useEffect(() => {
+    console.log(Object.values(list));
+    if (list.length === 5) {
+      setIsLoading(false);
+    }
+  }, [list]);
 
   if (search === '') {
     return <h2>No results found</h2>;
@@ -66,7 +79,7 @@ const VideoList = ({ search }) => {
                   {item.snippet.description}
                   <div>
                     <img
-                      src={console.log(Object.keys(item))}
+                      src={`data:image/jpeg;base64, ${item.thumbnailURL}`}
                       alt={`img-${item.id.videoId}`}
                     ></img>
                   </div>
