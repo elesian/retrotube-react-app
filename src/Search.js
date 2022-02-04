@@ -9,7 +9,6 @@ const Search = () => {
     event.preventDefault();
     const sanitisedString = event.target[0].value.split(/\s+/).join('');
     setSearch(sanitisedString);
-    return true;
   };
 
   return (
@@ -25,7 +24,9 @@ const Search = () => {
         ></input>
         <button type="submit">Submit</button>
       </form>
-      <div><VideoList search={search} /></div>
+      <div>
+        <VideoList search={search} />
+      </div>
     </div>
   );
 };

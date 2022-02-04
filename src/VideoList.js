@@ -33,7 +33,7 @@ const VideoList = ({ search }) => {
   };
 
   useEffect(() => {
-    if (search !== '' && isLoading === true) {
+    if (search !== '') {
       fetch(searchTerm)
         .then((res) => res.json())
         .then(({ items }) => {
@@ -51,16 +51,10 @@ const VideoList = ({ search }) => {
         })
         .then((newList) => {
           setList(() => newList);
+          setIsLoading(false);
         });
     }
   }, [search]);
-
-  useEffect(() => {
-    console.log(Object.values(list));
-    if (list.length === 5) {
-      setIsLoading(false);
-    }
-  }, [list]);
 
   if (search === '') {
     return <h2>No results found</h2>;
@@ -77,6 +71,7 @@ const VideoList = ({ search }) => {
               return (
                 <li key={item.id.videoId}>
                   {item.snippet.description}
+
                   <div>
                     <img
                       src={`data:image/jpeg;base64, ${item.thumbnailURL}`}
