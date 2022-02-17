@@ -65,8 +65,12 @@ const VideoList = ({ search }) => {
     return (
       <div className="task-list">
         <p>Loaded</p>
+        <div>
+          <VideoPlayer videoId={videoId}></VideoPlayer>
+        </div>
         {list.length !== 0 ? (
           <ul className="search-results">
+            <h2>Results</h2>
             {list.map((item) => {
               return (
                 <li key={item.id.videoId}>
@@ -91,9 +95,6 @@ const VideoList = ({ search }) => {
         ) : (
           <h2>No results found</h2>
         )}
-        <div>
-          <VideoPlayer videoId={videoId}></VideoPlayer>
-        </div>
       </div>
     );
 };

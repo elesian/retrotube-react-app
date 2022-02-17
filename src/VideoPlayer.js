@@ -1,7 +1,4 @@
 /** @format */
-
-import VideoList from './VideoList.js';
-
 const VideoPlayer = ({ videoId }) => {
   console.log(videoId);
   if (videoId === '') {
@@ -13,15 +10,17 @@ const VideoPlayer = ({ videoId }) => {
     );
   } else {
     return (
-      <div>
-        <h1>VideoPlayer</h1>
+      <div className="video-border">
+        <h2>VideoPlayer</h2>
         <h2>
-          <iframe
-            title={`embeddedVideo`}
-            width="420"
-            height="315"
-            src={`https://www.youtube.com/embed/${videoId}`}
-          ></iframe>
+          <div className="video-wrapper">
+            <iframe
+              title={`embeddedVideo`}
+              width="100%;"
+              height="500px;"
+              src={`https://www.youtube.com/embed/${videoId}`}
+            ></iframe>
+          </div>
         </h2>
       </div>
     );

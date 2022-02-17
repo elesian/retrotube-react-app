@@ -24,9 +24,7 @@ const Search = () => {
         ></input>
         <button type="submit">Submit</button>
       </form>
-      <div>
         <VideoList search={search} />
-      </div>
     </div>
   );
 };

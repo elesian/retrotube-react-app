@@ -3,6 +3,7 @@
 .App {
   text-align: center;
   grid: flex;
+  row-gap: 10px;
 }
 
 .App-header {
@@ -17,7 +18,7 @@
 }
 
 * {
-  outline: 1px red solid;
+  /* outline: 1px red solid; */
 }
 
 .block {
@@ -35,4 +36,61 @@
 .block:hover {
   background-color: #ddd;
   color: black;
+}
+
+ul {
+  list-style: none;
+  list-style: none;
+  padding-left: 0;
+}
+
+.Header {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
+    'Lucida Sans', Arial, sans-serif;
+  font-size: 200%;
+  color: red;
+  padding-bottom: 0.5em;
+  padding-top: 0.5em;
+  border: #282c34;
+  border-radius: 5%;
+  border-style: solid;
+  margin-bottom: 0.5em;
+}
+
+.task-list {
+  justify-content: center;
+}
+
+.video-wrapper {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 */
+  padding-top: 25px;
+  height: 0;
+}
+.video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.video-border {
+  color: black;
+  padding-bottom: 0.5em;
+  padding-top: 0.5em;
+  border: #282c34;
+  border-radius: 5%;
+  border-style: solid;
+  margin-bottom: 10px;
+}
+
+.search-results {
+  color: black;
+  padding-bottom: 0.5em;
+  padding-top: 0.5em;
+  border: #282c34;
+  border-radius: 5%;
+  border-style: solid;
+  margin-bottom: 10px;
 }
