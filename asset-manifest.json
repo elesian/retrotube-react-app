@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/retrotubePilot/static/css/main.85423ff9.css",
+    "main.js": "/retrotubePilot/static/js/main.3294c9fa.js",
+    "index.html": "/retrotubePilot/index.html",
+    "main.85423ff9.css.map": "/retrotubePilot/static/css/main.85423ff9.css.map",
+    "main.3294c9fa.js.map": "/retrotubePilot/static/js/main.3294c9fa.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.85423ff9.css",
+    "static/js/main.3294c9fa.js"
+  ]
+}
