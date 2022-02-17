@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/retrotubePilot/static/css/main.304087af.css",
-    "main.js": "/retrotubePilot/static/js/main.7e687ed6.js",
+    "main.js": "/retrotubePilot/static/js/main.df323080.js",
     "index.html": "/retrotubePilot/index.html",
     "main.304087af.css.map": "/retrotubePilot/static/css/main.304087af.css.map",
-    "main.7e687ed6.js.map": "/retrotubePilot/static/js/main.7e687ed6.js.map"
+    "main.df323080.js.map": "/retrotubePilot/static/js/main.df323080.js.map"
   },
   "entrypoints": [
     "static/css/main.304087af.css",
-    "static/js/main.7e687ed6.js"
+    "static/js/main.df323080.js"
   ]
 }
