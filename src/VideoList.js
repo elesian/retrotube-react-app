@@ -57,10 +57,11 @@ const VideoList = ({ search }) => {
   }, [search]);
 
   if (search === '') {
-    return <h2>No results found</h2>;
+    return <h2></h2>;
   }
 
   if (isLoading) return <p>Loading...</p>;
+  if (list.length === 0) return <h2>No results found</h2>;
   else
     return (
       <div className="task-list">
@@ -70,7 +71,7 @@ const VideoList = ({ search }) => {
         </div>
         {list.length !== 0 ? (
           <ul className="search-results">
-            <h2>Results</h2>
+            <h2>Search Results</h2>
             {list.map((item) => {
               return (
                 <li key={item.id.videoId}>
