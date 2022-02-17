@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/https://elesian.github.io/retrotubePilot/static/css/main.85423ff9.css",
+    "main.js": "/https://elesian.github.io/retrotubePilot/static/js/main.3294c9fa.js",
+    "index.html": "/https://elesian.github.io/retrotubePilot/index.html",
+    "main.85423ff9.css.map": "/https://elesian.github.io/retrotubePilot/static/css/main.85423ff9.css.map",
+    "main.3294c9fa.js.map": "/https://elesian.github.io/retrotubePilot/static/js/main.3294c9fa.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.85423ff9.css",
+    "static/js/main.3294c9fa.js"
+  ]
+}
