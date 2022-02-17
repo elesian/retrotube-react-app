@@ -5,7 +5,6 @@ import publicAPIKey from './publicAPIKey';
 import { useEffect } from 'react';
 import VideoPlayer from './VideoPlayer';
 let Buffer = require('buffer/').Buffer;
-
 const axios = require('axios').default;
 
 const VideoList = ({ search }) => {
@@ -13,6 +12,8 @@ const VideoList = ({ search }) => {
   const [list, setList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [videoId, setVideoId] = useState('No video selected');
+  const [prevPage, setPrevPage] = useState(null);
+  const [nextPage, setNextPage] = useState(null);
 
   const getBase64 = (url) => {
     return axios
@@ -96,6 +97,8 @@ const VideoList = ({ search }) => {
         ) : (
           <h2>No results found</h2>
         )}
+        <button class="nav-button">Previous Page</button>
+        <button class="nav-button">Next Page</button>
       </div>
     );
 };
