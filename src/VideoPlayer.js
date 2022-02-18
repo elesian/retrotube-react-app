@@ -12,6 +12,7 @@ const VideoPlayer = ({ videoId }) => {
     return (
       <div className="video-border">
         <h2>VideoPlayer</h2>
+        <hr></hr>
         <h2>
           <div className="video-wrapper">
             <iframe

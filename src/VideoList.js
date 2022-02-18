@@ -1,6 +1,6 @@
 /** @format */
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import publicAPIKey from './publicAPIKey';
 import { useEffect } from 'react';
 import VideoPlayer from './VideoPlayer';
@@ -8,12 +8,33 @@ let Buffer = require('buffer/').Buffer;
 const axios = require('axios').default;
 
 const VideoList = ({ search }) => {
-  const searchTerm = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&publishedBefore=2008-01-01T00%3A00%3A00Z&q=${search}&key=${publicAPIKey}`;
+  const [searchTerm, setSearchTerm] = useState(
+    `https://youtube.googleapis.com/youtube/v3/search?part=snippet&publishedBefore=2008-01-01T00%3A00%3A00Z&q=${search}&key=${publicAPIKey}`
+  );
   const [list, setList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [videoId, setVideoId] = useState('No video selected');
-  const [prevPage, setPrevPage] = useState(null);
-  const [nextPage, setNextPage] = useState(null);
+  const previousPage = useRef(null);
+  const nextPage = useRef(null);
+  let currentSearch = useRef(search);
+
+  const updatePagination = (forward) => {
+    //if forwards, update searchTerm, re-run use-effect
+    if (forward === true) {
+      console.log('next page');
+      console.log(nextPage);
+      setSearchTerm(
+        `https://youtube.googleapis.com/youtube/v3/search?part=snippet&publishedBefore=2008-01-01T00%3A00%3A00Z&q=${search}&key=${publicAPIKey}&pageToken=${nextPage.current}`
+      );
+    }
+    if (forward !== true && previousPage.current !== null) {
+      console.log('previous page');
+      console.log(previousPage);
+      setSearchTerm(
+        `https://youtube.googleapis.com/youtube/v3/search?part=snippet&publishedBefore=2008-01-01T00%3A00%3A00Z&q=${search}&key=${publicAPIKey}&pageToken=${previousPage.current}`
+      );
+    }
+  };
 
   const getBase64 = (url) => {
     return axios
@@ -34,10 +55,23 @@ const VideoList = ({ search }) => {
   };
 
   useEffect(() => {
+    console.log('use-effect ran');
     if (search !== '') {
+      if (search !== currentSearch.current) {
+        currentSearch.current = search;
+        setSearchTerm(
+          `https://youtube.googleapis.com/youtube/v3/search?part=snippet&publishedBefore=2008-01-01T00%3A00%3A00Z&q=${search}&key=${publicAPIKey}`
+        );
+      }
+      console.log(searchTerm);
       fetch(searchTerm)
         .then((res) => res.json())
-        .then(({ items }) => {
+        .then(({ items, nextPageToken, prevPageToken }) => {
+          console.log(nextPageToken);
+          nextPage.current = nextPageToken;
+          if (prevPageToken) {
+            previousPage.current = prevPageToken;
+          }
           const newList = Promise.all(
             items.map(async (item) => {
               return await getBase64(item.snippet.thumbnails.default.url).then(
@@ -55,7 +89,7 @@ const VideoList = ({ search }) => {
           setIsLoading(false);
         });
     }
-  }, [search]);
+  }, [search, searchTerm]);
 
   if (search === '') {
     return <h2></h2>;
@@ -73,11 +107,11 @@ const VideoList = ({ search }) => {
         {list.length !== 0 ? (
           <ul className="search-results">
             <h2>Search Results</h2>
+            <hr></hr>
             {list.map((item) => {
               return (
                 <li key={item.id.videoId}>
                   {item.snippet.description}
-
                   <div>
                     <img
                       src={`data:image/jpeg;base64, ${item.thumbnailURL}`}
@@ -97,8 +131,22 @@ const VideoList = ({ search }) => {
         ) : (
           <h2>No results found</h2>
         )}
-        <button class="nav-button">Previous Page</button>
-        <button class="nav-button">Next Page</button>
+        <button
+          class="nav-button"
+          onClick={() => {
+            updatePagination(false);
+          }}
+        >
+          Previous Page
+        </button>
+        <button
+          class="nav-button"
+          onClick={() => {
+            updatePagination(true);
+          }}
+        >
+          Next Page
+        </button>
       </div>
     );
 };
