@@ -16,7 +16,7 @@ const VideoList = ({ search }) => {
   const [videoId, setVideoId] = useState('No video selected');
   const previousPage = useRef(null);
   const nextPage = useRef(null);
-  let currentSearch = useRef(search);
+  let currentSearch = useRef(null);
 
   const updatePagination = (forward) => {
     //if forwards, update searchTerm, re-run use-effect
@@ -59,7 +59,9 @@ const VideoList = ({ search }) => {
     if (search !== '') {
       if (search !== currentSearch.current) {
         currentSearch.current = search;
-        setSearchTerm(
+        previousPage.current = null;
+        nextPage.current = null;
+        setSearchTerm(() =>
           `https://youtube.googleapis.com/youtube/v3/search?part=snippet&publishedBefore=2008-01-01T00%3A00%3A00Z&q=${search}&key=${publicAPIKey}`
         );
       }
@@ -132,7 +134,7 @@ const VideoList = ({ search }) => {
           <h2>No results found</h2>
         )}
         <button
-          class="nav-button"
+          className="nav-button"
           onClick={() => {
             updatePagination(false);
           }}
@@ -140,7 +142,7 @@ const VideoList = ({ search }) => {
           Previous Page
         </button>
         <button
-          class="nav-button"
+          className="nav-button"
           onClick={() => {
             updatePagination(true);
           }}
