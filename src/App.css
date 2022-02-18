@@ -57,6 +57,11 @@ ul {
   margin-bottom: 0.5em;
 }
 
+.Header > h3 {
+  font-size: 33%;
+  color: black;
+}
+
 .task-list {
   justify-content: center;
 }
