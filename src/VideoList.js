@@ -61,35 +61,37 @@ const VideoList = ({ search }) => {
         currentSearch.current = search;
         previousPage.current = null;
         nextPage.current = null;
-        setSearchTerm(() =>
-          `https://youtube.googleapis.com/youtube/v3/search?part=snippet&publishedBefore=2008-01-01T00%3A00%3A00Z&q=${search}&key=${publicAPIKey}`
+        setSearchTerm(
+          () =>
+            `https://youtube.googleapis.com/youtube/v3/search?part=snippet&publishedBefore=2008-01-01T00%3A00%3A00Z&q=${search}&key=${publicAPIKey}`
         );
-      }
-      console.log(searchTerm);
-      fetch(searchTerm)
-        .then((res) => res.json())
-        .then(({ items, nextPageToken, prevPageToken }) => {
-          console.log(nextPageToken);
-          nextPage.current = nextPageToken;
-          if (prevPageToken) {
-            previousPage.current = prevPageToken;
-          }
-          const newList = Promise.all(
-            items.map(async (item) => {
-              return await getBase64(item.snippet.thumbnails.default.url).then(
-                (image) => {
+      } else {
+        console.log(searchTerm);
+        fetch(searchTerm)
+          .then((res) => res.json())
+          .then(({ items, nextPageToken, prevPageToken }) => {
+            console.log(nextPageToken);
+            nextPage.current = nextPageToken;
+            if (prevPageToken) {
+              previousPage.current = prevPageToken;
+            }
+            const newList = Promise.all(
+              items.map(async (item) => {
+                return await getBase64(
+                  item.snippet.thumbnails.default.url
+                ).then((image) => {
                   addImage(item, image);
                   return item;
-                }
-              );
-            })
-          );
-          return newList;
-        })
-        .then((newList) => {
-          setList(() => newList);
-          setIsLoading(false);
-        });
+                });
+              })
+            );
+            return newList;
+          })
+          .then((newList) => {
+            setList(() => newList);
+            setIsLoading(false);
+          });
+      }
     }
   }, [search, searchTerm]);
 
