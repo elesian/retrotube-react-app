@@ -1,7 +1,7 @@
 {
   "name": "retrotube",
   "version": "0.1.0",
-  "homepage": "https://elesian.github.io/retrotubePilot",
+  "homepage": "https://elesian.github.io/retrotube-react-app",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.1",
