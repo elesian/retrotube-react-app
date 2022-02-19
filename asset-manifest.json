@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/retrotube-react-app/static/css/main.b4cc1660.css",
+    "main.css": "/retrotube-react-app/static/css/main.1689b632.css",
     "main.js": "/retrotube-react-app/static/js/main.fe9b2dd7.js",
     "index.html": "/retrotube-react-app/index.html",
-    "main.b4cc1660.css.map": "/retrotube-react-app/static/css/main.b4cc1660.css.map",
+    "main.1689b632.css.map": "/retrotube-react-app/static/css/main.1689b632.css.map",
     "main.fe9b2dd7.js.map": "/retrotube-react-app/static/js/main.fe9b2dd7.js.map"
   },
   "entrypoints": [
-    "static/css/main.b4cc1660.css",
+    "static/css/main.1689b632.css",
     "static/js/main.fe9b2dd7.js"
   ]
 }
