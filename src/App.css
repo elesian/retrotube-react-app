@@ -52,7 +52,7 @@ ul {
   padding-bottom: 0.5em;
   padding-top: 0.5em;
   border: #282c34;
-  border-radius: 5%;
+  border-radius: 25px;
   border-style: solid;
   margin-bottom: 0.5em;
 }
@@ -85,7 +85,7 @@ ul {
   padding-bottom: 0.5em;
   padding-top: 0.5em;
   border: #282c34;
-  border-radius: 5%;
+  border-radius: 25px;
   border-style: solid;
   margin-bottom: 10px;
 }
@@ -95,7 +95,7 @@ ul {
   padding-bottom: 0.5em;
   padding-top: 0.5em;
   border: #282c34;
-  border-radius: 5%;
+  border-radius: 25px;
   border-style: solid;
   margin-bottom: 10px;
 }
