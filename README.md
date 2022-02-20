@@ -39,7 +39,7 @@ The core functionality of the project has been implemented. Future features woul
 
 - Build a landing page showing popular videos for different video categories.
 - Add total video views and channel.
-- OAUTH2.0 authentication for POST/PATCH/DELETE requests i.e video uploading or comment deletion.
+- OAUTH2.0 authentication for POST/PATCH/DELETE requests i.e. video uploading or comment deletion.
 
 ## Licensing
 
