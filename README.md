@@ -11,7 +11,7 @@ This mini-app is a 'retro' youtube clone built with React. The app makes use of 
 
 ## Installation
 
-Please see https://github.com/elesian/retrotube-react-app.git for a live demo.
+Please see https://elesian.github.io/retrotube-react-app/ for a live demo.
 
 ### Prerequisites
 
